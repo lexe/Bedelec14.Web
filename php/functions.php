@@ -44,6 +44,7 @@ function login_check($mysqli) {
         if ($stmt) {
             $stmt->bind_param('i', $user_id);
             $stmt->execute();
+            $stmt->store_result();
             
             if ($stmt->num_rows == 1) {
                 return true;

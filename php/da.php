@@ -1,5 +1,41 @@
 <?php
 
+function getScoreBoard($mysqli) {
+    $users = getUsers($mysqli);
+    $games = getPlayedGames($mysqli);
+    foreach ($games as $game) {
+        $bets = getBetsByGame($mysqli, $game->getID());
+        foreach ($bets as $bet) {
+            $users[$bet->getUserID()]->setScore(getScore($game, $bet));
+        }
+    }
+    return $users;
+}
+
+function getScore(Game $game, Bet $bet) {
+    if ($game->getScoreTeam1() == -1 || $game->getScoreTeam2() == -1) {
+        return 0;
+    }
+    
+    if ($bet->getScoreTeam1() == $game->getScoreTeam1() && $bet->getScoreTeam2() == $game->getScoreTeam2()) {
+        return 2;
+    }
+    else if ($bet->getScoreTeam1() > $bet->getScoreTeam2() && $game->getScoreTeam1() > $game->getScoreTeam2()) {
+                echo "1";
+        return 1;
+    }
+    else if ($bet->getScoreTeam1() < $bet->getScoreTeam2() && $game->getScoreTeam1() < $game->getScoreTeam2()) {
+                echo "2";
+        return 1;
+    }
+    else if ($bet->getScoreTeam1() == $bet->getScoreTeam2() && $game->getScoreTeam1() == $game->getScoreTeam2()) {
+                echo $game->getID();
+        return 1;
+    }
+    
+    return 0;
+}
+
 function getUsers($mysqli) {
     $result = $mysqli->query("CALL GetUsers");
     if ($result) {
@@ -8,6 +44,9 @@ function getUsers($mysqli) {
             $user = mapUser($row);
             $retVal[$user->getID()] = $user;
         }
+        $result->close();
+        $mysqli->next_result();
+       
         return $retVal;
     }
 }
@@ -19,6 +58,9 @@ function getTeams($mysqli) {
             $team = mapTeam($row);
             $retVal[$team->getID()] = $team;
         }
+        $result->close();
+        $mysqli->next_result();
+        
         return $retVal;
     }
 }
@@ -30,6 +72,9 @@ function getUpcomingGames($mysqli) {
             $game = mapGame($row);
             $retVal[$game->getID()] = $game;
         }        
+        $result->close();
+        $mysqli->next_result();
+        
         return $retVal;
     }
 }
@@ -40,7 +85,25 @@ function getPlayedGames($mysqli) {
         while ($row = mysqli_fetch_assoc($result)) {
             $game = mapGame($row);
             $retVal[$game->getID()] = $game;
-        }        
+        }      
+        $result->close();
+        $mysqli->next_result();
+        
+        return $retVal;
+    }
+}
+function getBetsByGame($myqsli, $gameID) {
+    $stmt = $myqsli->prepare("SELECT * FROM Bets WHERE GameID=?");
+    if ($stmt) {
+        $stmt->bind_param("i", $gameID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        $retVal = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+            $bet = mapBet($row);
+            $retVal[$bet->getUserID()] = $bet;
+        }
         return $retVal;
     }
 }
@@ -152,8 +215,8 @@ function mapGame($row) {
     $game = new Game();
     $game->setID($row["ID"]);
     $game->setDate($row["Date"]);
-    $game->setTeam1ID($row["Name"]);
-    $game->setTeam2ID($row["Name"]);
+    $game->setTeam1ID($row["Team1ID"]);
+    $game->setTeam2ID($row["Team2ID"]);
     $game->setScoreTeam1($row["ScoreTeam1"]);
     $game->setScoreTeam2($row["ScoreTeam2"]);    
     
@@ -190,4 +253,13 @@ class Bet {
     function setScoreTeam2($scoreTeam2) {
         $this->scoreTeam2 = $scoreTeam2;
     }
+}
+function mapBet($row) {
+    $bet = new Bet();
+    $bet->setGameID($row["GameID"]);
+    $bet->setUserID($row["UserID"]);
+    $bet->setScoreTeam1($row["ScoreTeam1"]);
+    $bet->setScoreTeam2($row["ScoreTeam2"]);
+    
+    return $bet;
 }

@@ -1,0 +1,29 @@
+#menu {
+    float: left;  
+    width: 240px;
+    
+    background-color: #CCCCCC;
+}
+#content {
+    float: left;
+    margin-left: 6px;
+    
+    background-color: #CCCCFF;
+}
+
+div.user {
+    
+}
+
+tr.scoreboardHeader {
+    background-color: #FF0000;
+}
+td.scoreboard1 {
+    width: 32px;
+}
+td.scoreboard2 {
+    width: 160px;
+}
+td.scoreboard3 {
+    width: 32px;
+}
