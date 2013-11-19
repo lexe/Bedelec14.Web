@@ -1,22 +1,19 @@
 #menu {
     float: left;  
-    width: 240px;
+    width: 160px;
     
-    background-color: #CCCCCC;
+    background-color: #FFFFFF;
 }
 #content {
     float: left;
     margin-left: 6px;
     
-    background-color: #CCCCFF;
+    background-color: #FFFFFF;
 }
 
-div.user {
-    
-}
-
-tr.scoreboardHeader {
-    background-color: #FF0000;
+tr.header {
+    background-color: #1E90FF;
+    color: #FFFFFF;
 }
 td.scoreboard1 {
     width: 32px;
@@ -26,4 +23,16 @@ td.scoreboard2 {
 }
 td.scoreboard3 {
     width: 32px;
+}
+td.upcoming1 {
+    width: 64px;
+}
+td.upcoming2 {
+    width: 160px;
+}
+td.upcoming3 {
+    width: 160px;
+}
+td.upcoming4 {
+    width: 64px;
 }

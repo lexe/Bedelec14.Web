@@ -1,8 +1,8 @@
 <table>
-    <tr class="scoreboardHeader">
+    <tr class="header">
         <td class="scoreboard1">#</td>
         <td class="scoreboard2">Naam</td>
-        <td class="scoreboard3">P</td>
+        <td class="scoreboard3">Ptn</td>
     </tr>
     <?php
     $i = 1;

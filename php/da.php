@@ -214,7 +214,7 @@ class Game {
 function mapGame($row) {
     $game = new Game();
     $game->setID($row["ID"]);
-    $game->setDate($row["Date"]);
+    $game->setDate(new DateTime($row["Date"], new DateTimeZone("Europe/Brussels")));
     $game->setTeam1ID($row["Team1ID"]);
     $game->setTeam2ID($row["Team2ID"]);
     $game->setScoreTeam1($row["ScoreTeam1"]);
