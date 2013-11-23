@@ -3,8 +3,8 @@
         <td class="game1">Tijd</td>
         <td class="game2">Team 1</td>
         <td class="game3">Team 2</td>
-        <td class="game4">Prono</td>
-        <td class="game5">Result</td>
+        <td class="game4header">Prono</td>
+        <td class="game5header">Result</td>
         <td class="game6">Pts</td>
     </tr>
     <?php
@@ -38,7 +38,7 @@
             . "<td class='game3'>" . $teams[$game->getTeam2ID()]->getName() . "</td>"
             . "<td class='game4'>" . $prono . "</a></td>"
             . "<td class='game5'>" . $game->getResult() . "</td>"
-            . "<td class='game6'>" . "" . "</td>"
+            . "<td class='game6'>" . getScore($game, $bet) . "</td>"
             . "</tr>\n";
     }
     ?>

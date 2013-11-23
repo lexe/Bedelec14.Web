@@ -42,10 +42,31 @@ td.game3 {
 }
 td.game4 {
     width: 64px;
+    text-align: center;
+}
+td.game4header {
+    width: 64px;
 }
 td.game5 {
     width: 64px;
+    text-align: center;
+}
+td.game5header {
+    width: 64px;
 }
 td.game6 {
-    width: 64px;    
+    width: 64px;   
+}
+td.editBet {
+    width: 160px;
+}
+td.editBetHeader {
+    width: 160px;
+    
+    background-color: #1E90FF;
+    color: #FFFFFF;
+    text-align: center;
+}
+input.inputBet {
+    width: 100%;
 }

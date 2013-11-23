@@ -3,7 +3,7 @@
         <td class="game1">Tijd</td>
         <td class="game2">Team 1</td>
         <td class="game3">Team 2</td>
-        <td class="game4">Prono</td>
+        <td class="game4header">Prono</td>
     </tr>
     <?php
     $teams = getTeams($mysqli);

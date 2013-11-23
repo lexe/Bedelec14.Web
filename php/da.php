@@ -12,7 +12,10 @@ function getScoreBoard($mysqli) {
     return $users;
 }
 
-function getScore(Game $game, Bet $bet) {
+function getScore($game, $bet) {   
+    if ($bet == null) {
+        return 0;
+    }
     if ($game->getScoreTeam1() == -1 || $game->getScoreTeam2() == -1) {
         return 0;
     }
@@ -64,6 +67,18 @@ function getTeams($mysqli) {
         return $retVal;
     }
 }
+function getGame($mysqli, $gameID) {
+    $stmt = $mysqli->prepare("SELECT * FROM Games WHERE ID=?");
+    if ($stmt) {
+        $stmt->bind_param("i", $gameID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows == 1) {
+            return mapGame($result->fetch_assoc());  
+        }
+    }    
+}
 function getUpcomingGames($mysqli) {
     $result = $mysqli->query("CALL GetUpcomingGames");
     if ($result) {
@@ -107,8 +122,8 @@ function getBetsByGame($myqsli, $gameID) {
         return $retVal;
     }
 }
-function getBet($myqsli, $gameID, $userID) {
-    $stmt = $myqsli->prepare("SELECT * FROM Bets WHERE GameID=? AND UserID=?");
+function getBet($mysqli, $gameID, $userID) {
+    $stmt = $mysqli->prepare("SELECT * FROM Bets WHERE GameID=? AND UserID=?");
     if ($stmt) {
         $stmt->bind_param("ii", $gameID, $userID);
         $stmt->execute();
@@ -117,6 +132,13 @@ function getBet($myqsli, $gameID, $userID) {
         if ($result->num_rows == 1) {
             return mapBet($result->fetch_assoc());  
         }
+    }
+}
+function updateBet($mysqli, $gameID, $userID, $score1, $score2) {
+    $stmt = $mysqli->prepare("CALL UpdateBet(?, ?, ?, ?)");
+    if ($stmt) {
+        $stmt->bind_param("iiii", $gameID, $userID, $score1, $score2);
+        $stmt->execute();
     }
 }
 

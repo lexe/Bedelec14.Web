@@ -13,7 +13,7 @@
     
     <form action="php/process_login.php" method="post" name="login_form">
         Username: <input type="text" name="userName"/><br />
-        Password: <input type="password" name="password" id="password" /><br />
+        Password: <input type="password" name="password"/><br />
         <input type="submit" value="Login" />
     </form>
 </body>
