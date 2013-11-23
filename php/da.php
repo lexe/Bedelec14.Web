@@ -227,7 +227,7 @@ class Game {
             return $this->scoreTeam1 . " - " . $this->scoreTeam2;
         }
         else {
-            return "";
+            return "--";
         }
     }
 }
@@ -278,7 +278,7 @@ class Bet {
             return $this->scoreTeam1 . " - " . $this->scoreTeam2;
         }
         else {
-            return "";
+            return "--";
         }
     }
 }

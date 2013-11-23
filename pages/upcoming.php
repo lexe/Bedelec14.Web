@@ -1,9 +1,9 @@
 <table>
     <tr class="header">
-        <td class="upcoming1">Tijd</td>
-        <td class="upcoming2">Team 1</td>
-        <td class="upcoming3">Team 2</td>
-        <td class="upcoming4">Prono</td>
+        <td class="game1">Tijd</td>
+        <td class="game2">Team 1</td>
+        <td class="game3">Team 2</td>
+        <td class="game4">Prono</td>
     </tr>
     <?php
     $teams = getTeams($mysqli);
@@ -31,10 +31,10 @@
         
         // add game to list
         echo "\n<tr>"
-            . "<td class='upcoming1'>" . $game->getDate()->format("H:i") . "</td>"
-            . "<td class='upcoming2'>" . $teams[$game->getTeam1ID()]->getName() . "</td>"
-            . "<td class='upcoming3'>" . $teams[$game->getTeam2ID()]->getName() . "</td>"
-            . "<td class='upcoming4'><a href='index.php?page=edit_bet&game_id=". $game->getID() . "'>" . $prono . "</a></td>"
+            . "<td class='game1'>" . $game->getDate()->format("H:i") . "</td>"
+            . "<td class='game2'>" . $teams[$game->getTeam1ID()]->getName() . "</td>"
+            . "<td class='game3'>" . $teams[$game->getTeam2ID()]->getName() . "</td>"
+            . "<td class='game4'><a href='index.php?page=edit_bet&game_id=". $game->getID() . "'>" . $prono . "</a></td>"
             . "</tr>\n";
     }
     ?>

@@ -31,15 +31,21 @@ td.scoreboard2 {
 td.scoreboard3 {
     width: 32px;
 }
-td.upcoming1 {
+td.game1 {
     width: 64px;
 }
-td.upcoming2 {
+td.game2 {
     width: 160px;
 }
-td.upcoming3 {
+td.game3 {
     width: 160px;
 }
-td.upcoming4 {
+td.game4 {
     width: 64px;
+}
+td.game5 {
+    width: 64px;
+}
+td.game6 {
+    width: 64px;    
 }
