@@ -9,7 +9,7 @@ if (isset($_POST['userName'], $_POST['password'])) {
     $password = $_POST['password'];
 
     if (login($userName, $password, $mysqli)) {
-        header("Location: index.php?page=scoreboard");
+        header("Location: ../pages/index.php?page=scoreboard");
     }
     else {
         echo 'Authentication failed';

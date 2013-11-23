@@ -7,9 +7,9 @@
 </head>
 <body>
     <?php
-    include "da.php";
-    include "db_connect.php";
-    include "functions.php";
+    include "../php/da.php";
+    include "../php/db_connect.php";
+    include "../php/functions.php";
     sec_session_start();
     
     if (login_check($mysqli) == false) {
