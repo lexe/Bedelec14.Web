@@ -107,6 +107,18 @@ function getBetsByGame($myqsli, $gameID) {
         return $retVal;
     }
 }
+function getBet($myqsli, $gameID, $userID) {
+    $stmt = $myqsli->prepare("SELECT * FROM Bets WHERE GameID=? AND UserID=?");
+    if ($stmt) {
+        $stmt->bind_param("ii", $gameID, $userID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows == 1) {
+            return mapBet($result->fetch_assoc());  
+        }
+    }
+}
 
 class User {
     private $id;
@@ -210,6 +222,14 @@ class Game {
     function setScoreTeam2($scoreTeam2) {
         $this->scoreTeam2 = $scoreTeam2;
     }
+    function getResult() {
+        if ($this->scoreTeam1 >= 0 && $this->scoreTeam2 >= 0) {
+            return $this->scoreTeam1 . " - " . $this->scoreTeam2;
+        }
+        else {
+            return "";
+        }
+    }
 }
 function mapGame($row) {
     $game = new Game();
@@ -252,6 +272,14 @@ class Bet {
     }
     function setScoreTeam2($scoreTeam2) {
         $this->scoreTeam2 = $scoreTeam2;
+    }
+    function getProno() {
+        if ($this->scoreTeam1 >= 0 && $this->scoreTeam2 >= 0) {
+            return $this->scoreTeam1 . " - " . $this->scoreTeam2;
+        }
+        else {
+            return "";
+        }
     }
 }
 function mapBet($row) {

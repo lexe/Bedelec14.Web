@@ -11,6 +11,13 @@
     background-color: #FFFFFF;
 }
 
+div.date {
+    background-color: #CCCCCC;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-left: 3px;
+}
+
 tr.header {
     background-color: #1E90FF;
     color: #FFFFFF;

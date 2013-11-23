@@ -8,14 +8,34 @@
     <?php
     $teams = getTeams($mysqli);
     $date = "";
+    $dateGame = "";
     $prono = "";
     foreach(getUpcomingGames($mysqli) as $game) {
-        echo "<tr>"
+        // order by date
+        $dateGame = $game->getDate()->format("d/m/Y");
+        if ($date != $dateGame) {
+            echo "</table>"
+                . "\n<div class='date'>" . $dateGame . "</div>"
+                . "\n<table>";
+        }
+        $date = $dateGame;
+        
+        // get prono
+        $bet = getBet($mysqli, $game->getID(), $_SESSION['user_id']);
+        if ($bet) {
+            $prono = $bet->getProno();
+        }
+        else {
+            $prono = "--";
+        }
+        
+        // add game to list
+        echo "\n<tr>"
             . "<td class='upcoming1'>" . $game->getDate()->format("H:i") . "</td>"
             . "<td class='upcoming2'>" . $teams[$game->getTeam1ID()]->getName() . "</td>"
             . "<td class='upcoming3'>" . $teams[$game->getTeam2ID()]->getName() . "</td>"
-            . "<td class='upcoming4'>" . $prono . "</td>"
-            . "</tr>";
+            . "<td class='upcoming4'><a href='index.php?page=edit_bet&game_id=". $game->getID() . "'>" . $prono . "</a></td>"
+            . "</tr>\n";
     }
     ?>
 </table>
