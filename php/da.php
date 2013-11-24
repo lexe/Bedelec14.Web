@@ -24,15 +24,12 @@ function getScore($game, $bet) {
         return 2;
     }
     else if ($bet->getScoreTeam1() > $bet->getScoreTeam2() && $game->getScoreTeam1() > $game->getScoreTeam2()) {
-                echo "1";
         return 1;
     }
     else if ($bet->getScoreTeam1() < $bet->getScoreTeam2() && $game->getScoreTeam1() < $game->getScoreTeam2()) {
-                echo "2";
         return 1;
     }
     else if ($bet->getScoreTeam1() == $bet->getScoreTeam2() && $game->getScoreTeam1() == $game->getScoreTeam2()) {
-                echo $game->getID();
         return 1;
     }
     

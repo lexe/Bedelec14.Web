@@ -1,14 +1,31 @@
+#main {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+    
+    border: 1px solid #CCCCCC;
+}
 #menu {
-    float: left;  
-    width: 160px;
+    position: relative;
+    float: left;
+    width: 188px;
+    margin-left: 6px;
+    margin-right: 6px;
+    padding-top: 20px;
     
     background-color: #FFFFFF;
 }
 #content {
+    position: relative;
     float: left;
-    margin-left: 6px;
+    width: 400px;
     
     background-color: #FFFFFF;
+}
+
+button.menu {
+    width: 100%;
 }
 
 div.date {
@@ -26,7 +43,7 @@ td.scoreboard1 {
     width: 32px;
 }
 td.scoreboard2 {
-    width: 160px;
+    width: 336px;
 }
 td.scoreboard3 {
     width: 32px;

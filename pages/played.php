@@ -12,6 +12,8 @@
     $date = "";
     $dateGame = "";
     $prono = "";
+    $color = "FFFFFF";
+    $score = 0;
     foreach(getPlayedGames($mysqli) as $game) {
         // order by date
         $dateGame = $game->getDate()->format("d/m/Y");
@@ -31,6 +33,15 @@
             $prono = "--";
         }
         
+        // score & color
+        $score = getScore($game, $bet);
+        if ($score > 0) {
+            $color = "32CD32";
+        }
+        else {
+            $color = "FFFFFF";
+        }
+        
         // add game to list
         echo "\n<tr>"
             . "<td class='game1'>" . $game->getDate()->format("H:i") . "</td>"
@@ -38,7 +49,7 @@
             . "<td class='game3'>" . $teams[$game->getTeam2ID()]->getName() . "</td>"
             . "<td class='game4'>" . $prono . "</a></td>"
             . "<td class='game5'>" . $game->getResult() . "</td>"
-            . "<td class='game6'>" . getScore($game, $bet) . "</td>"
+            . "<td class='game6' style='background-color: #" . $color . ";'>" . $score . "</td>"
             . "</tr>\n";
     }
     ?>
